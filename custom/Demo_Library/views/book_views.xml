@@ -1,0 +1,45 @@
+<!-- views/book_views.xml -->
+<odoo>
+    <!-- Tree View Definition -->
+    <record id="view_book_tree" model="ir.ui.view">
+        <field name="name">book.registry.tree</field>
+        <field name="model">book.registry</field>
+        <field name="arch" type="xml">
+            <tree string="Books">
+                <field name="name"/>
+                <field name="author"/>
+                <field name="publication_date"/>
+                <field name="isbn"/>
+                <field name="genre"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Form View Definition -->
+    <record id="view_book_form" model="ir.ui.view">
+        <field name="name">book.registry.form</field>
+        <field name="model">book.registry</field>
+        <field name="arch" type="xml">
+            <form string="Books">
+                <group>
+                    <field name="name"/>
+                    <field name="author"/>
+                    <field name="publication_date"/>
+                    <field name="isbn"/>
+                    <field name="genre"/>
+                </group>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action Definition -->
+    <record id="action_book_registry" model="ir.actions.act_window">
+        <field name="name">Books</field>
+        <field name="res_model">book.registry</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Menu Item Definitions -->
+    <menuitem id="menu_library_root" name="Library" sequence="1"/>
+    <menuitem id="menu_library_books" name="Books" parent="menu_library_root" action="action_book_registry" sequence="2"/>
+</odoo>
