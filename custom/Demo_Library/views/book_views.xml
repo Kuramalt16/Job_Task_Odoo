@@ -13,13 +13,12 @@
         </field>
     </record>
 
-    <record id="view_library_book_filter" model="ir.ui.view">
-        <field name="name">book.registry.filter</field>
+    <record id="library_book_search" model="ir.ui.view">
+        <field name="name">book.registry.search</field>
         <field name="model">book.registry</field>
         <field name="arch" type="xml">
-            <search>
-                <field name="name" string="Title"/>
-                <field name="genre" string="Genre"/>
+            <search string="Search Books">
+                <field name="name" filter_domain="['|',('name', 'ilike', self), ('genre', 'ilike', self)]"/>
             </search>
         </field>
     </record>
