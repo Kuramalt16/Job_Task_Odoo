@@ -1,0 +1,87 @@
+<!-- views/book_views.xml -->
+<odoo>
+    <record id="view_res_partner_form_inherited" model="ir.ui.view">
+        <field name="name">res.partner.form.inherited</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//form/sheet/group" position="inside">
+                <group>
+                    <field name="name"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_rent_tree" model="ir.ui.view">
+        <field name="name">rent.books.tree</field>
+        <field name="model">rent.books</field>
+        <field name="arch" type="xml">
+            <tree string="Rent">
+                <field name="contact"/>
+                <field name="rented_book_id"/>
+                <field name="start_of_rent"/>
+                <field name="end_of_rent"/>
+                <field name="state_of_rent"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_rent_calendar" model="ir.ui.view">
+        <field name="name">rent.books.calendar</field>
+        <field name="model">rent.books</field>
+        <field name="arch" type="xml">
+        <calendar string="Rent" date_start="start_of_rent" date_stop="end_of_rent" color="state_of_rent">
+            <field name="contact"/>
+            <field name="rented_book_id"/>
+            <field name="state_of_rent"/>
+        </calendar>
+        </field>
+    </record>
+
+    <record id="view_rent_form" model="ir.ui.view">
+        <field name="name">rent.books.form</field>
+        <field name="model">rent.books</field>
+        <field name="arch" type="xml">
+            <form string="Books">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="contact"/>
+                        </group>
+                        <group>
+                            <field name="rented_book_id"/>
+                        </group>
+                    </group>
+                    <group>
+                        <group>
+                            <field name="start_of_rent"/>
+                        </group>
+                        <group>
+                            <field name="end_of_rent"/>
+                        </group>
+                    </group>
+                    <group>
+                        <button name="action_cancel_rent" type="object" string="Cancel" class="oe_highlight"/>
+                        <button name="action_return_book" type="object" string="Return" class="oe_highlight"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_book_rent" model="ir.actions.act_window">
+        <field name="name">Rent</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">rent.books</field>
+        <field name="view_mode">tree,form,calendar</field>
+        <field name="help" type="html">
+          <p class="o view nocontent smiling face">
+             Rent a book!!
+          </p>
+        </field>
+    </record>
+
+    <menuitem id="menu_library_rent" name="Rent" parent="menu_library_root" action="action_book_rent"/>
+
+</odoo>
