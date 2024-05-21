@@ -1,45 +1,64 @@
 <!-- views/book_views.xml -->
 <odoo>
-    <!-- Tree View Definition -->
     <record id="view_book_tree" model="ir.ui.view">
         <field name="name">book.registry.tree</field>
         <field name="model">book.registry</field>
         <field name="arch" type="xml">
             <tree string="Books">
                 <field name="name"/>
-                <field name="author"/>
-                <field name="publication_date"/>
-                <field name="isbn"/>
                 <field name="genre"/>
+                <field name="num_of_pages"/>
+                <field name="summary"/>
             </tree>
         </field>
     </record>
 
-    <!-- Form View Definition -->
+    <record id="view_library_book_filter" model="ir.ui.view">
+        <field name="name">book.registry.filter</field>
+        <field name="model">book.registry</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name" string="Title"/>
+                <field name="genre" string="Genre"/>
+            </search>
+        </field>
+    </record>
+
     <record id="view_book_form" model="ir.ui.view">
         <field name="name">book.registry.form</field>
         <field name="model">book.registry</field>
         <field name="arch" type="xml">
             <form string="Books">
-                <group>
-                    <field name="name"/>
-                    <field name="author"/>
-                    <field name="publication_date"/>
-                    <field name="isbn"/>
-                    <field name="genre"/>
-                </group>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="num_of_pages"/>
+                        </group>
+                        <group>
+                            <field name="genre"/>
+                        </group>
+                    </group>
+                    <group>
+                        <field name="summary"/>
+                    </group>
+                </sheet>
             </form>
         </field>
     </record>
 
-    <!-- Action Definition -->
     <record id="action_book_registry" model="ir.actions.act_window">
-        <field name="name">Books</field>
-        <field name="res_model">book.registry</field>
-        <field name="view_mode">tree,form</field>
+            <field name="name">Books</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">book.registry</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+              <p class="o view nocontent smiling face">
+                 Create First Book!
+              </p>
+            </field>
     </record>
 
-    <!-- Menu Item Definitions -->
-    <menuitem id="menu_library_root" name="Library" sequence="1"/>
-    <menuitem id="menu_library_books" name="Books" parent="menu_library_root" action="action_book_registry" sequence="2"/>
+    <menuitem id="menu_library_root" name="Library" sequence="0" web_icon="Demo_Library,static/describtion/icon.png"/>
+    <menuitem id="menu_library_books" name="Books" parent="menu_library_root" action="action_book_registry"/>
 </odoo>

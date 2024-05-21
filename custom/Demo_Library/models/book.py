@@ -6,7 +6,6 @@ class BookRegistry(models.Model):
     _description = 'Book Registry'
 
     name = fields.Char(string='Title', required=True)
-    author = fields.Char(string='Author', required=True)
-    publication_date = fields.Date(string='Publication Date')
-    isbn = fields.Char(string='ISBN')
+    summary = fields.Char(string='Summary', required=True)
+    num_of_pages = fields.Char(string='Number of Pages')
     genre = fields.Char(string='Genre')
