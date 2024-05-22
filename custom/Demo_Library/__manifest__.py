@@ -9,10 +9,12 @@
     'depends': ['base'],
     'data': [
         'data/cron.xml',
+        'data/data.xml',
         'security/ir.model.access.csv',
         'views/book_views.xml',
         'views/rent_views.xml',
     ],
+    'demo': [],
     'installable': True,
     'application': True,
 }

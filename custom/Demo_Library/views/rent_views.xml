@@ -31,7 +31,7 @@
         <field name="name">rent.books.calendar</field>
         <field name="model">rent.books</field>
         <field name="arch" type="xml">
-        <calendar string="Rent" date_start="start_of_rent" date_stop="end_of_rent" color="state_of_rent">
+        <calendar string="Rent" date_start="start_of_rent" date_stop="end_of_rent" color="state_of_rent"> 
             <field name="contact"/>
             <field name="rented_book_id"/>
             <field name="state_of_rent"/>
@@ -60,6 +60,9 @@
                         <group>
                             <field name="end_of_rent"/>
                         </group>
+                    </group>
+                    <group>
+                        <field name="state_of_rent"/>
                     </group>
                     <group>
                         <button name="action_cancel_rent" type="object" string="Cancel" class="oe_highlight"/>

@@ -90,4 +90,5 @@ class BookRent(models.Model):
             ])
 
             if overlapping_rentals:
-                raise ValidationError('The book is already rented for the selected period.')
+                raise ValidationError(record.rented_book_id.book_name + ' is already rented for the selected period. (From: ' + str(record.start_of_rent) + ' Until: ' + str(record.end_of_rent) + ')')
+

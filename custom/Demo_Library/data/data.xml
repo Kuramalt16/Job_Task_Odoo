@@ -1,0 +1,28 @@
+<odoo>
+    <data noupdate="1">
+        <record id="Book_data_1" model="book.registry">
+            <field name="book_name">Harry Potter and the Philosopher's Stone</field>
+            <field name="summary">Harry discovers he's a wizard, attends Hogwarts, makes friends, and stops Voldemort from obtaining the Sorcerer's Stone to gain immortality.</field>
+            <field name="num_of_pages">223</field>
+            <field name="genre">Novel, Children's literature, Fantasy</field>
+        </record>
+        <record id="Book_data_2" model="book.registry">
+            <field name="book_name">Harry Potter and the Chamber of Secrets</field>
+            <field name="summary">Harry returns to Hogwarts, battles a basilisk, discovers Tom Riddle's diary, and learns he's connected to Voldemort through Parseltongue.</field>
+            <field name="num_of_pages">352</field>
+            <field name="genre">Novel, Children's literature, Fantasy</field>
+        </record>
+        <record id="Book_data_3" model="book.registry">
+            <field name="book_name">A Court of Thorns and Roses</field>
+            <field name="summary">Feyre, a mortal huntress, kills a faerie wolf and is taken to the faerie realm by Tamlin, a High Lord. She discovers a curse threatening their world. As romance blooms between them, Feyre must break the curse by facing trials and defeating Amarantha, ultimately saving Tamlin and the faerie lands.</field>
+            <field name="num_of_pages">448</field>
+            <field name="genre">Novel, Young Adult literature, Fantasy</field>
+        </record>
+        <record id="Book_data_4" model="book.registry">
+            <field name="book_name">A Court of Mist and Fury</field>
+            <field name="summary">Feyre grapples with trauma from Under the Mountain. She finds solace and love in Rhysand, the Night Court's High Lord. As she embraces her powers, she uncovers secrets about her ancestry and the looming threat of Hybern's invasion. Feyre becomes pivotal in shaping the fate of Prythian.</field>
+            <field name="num_of_pages">656</field>
+            <field name="genre">Novel, Young Adult literature, Fantasy, Romance</field>
+        </record>
+    </data>
+</odoo>
