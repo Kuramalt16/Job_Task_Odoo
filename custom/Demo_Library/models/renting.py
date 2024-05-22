@@ -4,11 +4,6 @@ from odoo.exceptions import ValidationError
 from datetime import date
 import logging
 
-def print_log(message):
-    _logger = logging.getLogger(__name__)
-    _logger.info(message)
-
-
 class ResPartner_Inherit(models.Model):
     _inherit = 'res.partner'
     name = fields.Char(string='Name')
@@ -28,20 +23,28 @@ class BookRent(models.Model):
         ('returned', 'Returned'),
         ('canceled', 'Canceled'),
         ], default='rented', string="State")
+    days_late = fields.Integer(string="Days Late", compute='_compute_days_late')
 
-
-    def Check_late_books(self):
+    @api.depends('end_of_rent')
+    def _compute_days_late(self):
         today = date.today()
         for record in self:
-            print_log(record)
-            print_log(record.state_of_rent)
+            if record.end_of_rent and record.end_of_rent < today:
+                record.days_late = (today - record.end_of_rent).days
+            else:
+                record.days_late = 0
+
+    def scheduled_Late_messaging(self):
+        today = date.today()
+        for record in self.env['rent.books'].search([]):
+            if record.end_of_rent and record.end_of_rent < today:
+                template_id = self.env.ref('Demo_Library.reminder_mail_template').id
+                self.env['mail.template'].browse(template_id).send_mail(record.id, force_send=True)
 
     def action_cancel_rent(self):
         for record in self:
             if record.state_of_rent == "reserved":
                 record.state_of_rent = 'canceled'
-                print_log("pressed CANCEL")
-                print_log(record.state_of_rent)
             else:
                 raise ValidationError('Cant cancel non existing orders')
 
@@ -49,8 +52,6 @@ class BookRent(models.Model):
         for record in self:
             if record.state_of_rent == "rented":
                 record.state_of_rent = 'returned'
-                print_log("pressed RETURN")
-                print_log(record.state_of_rent)
             else:
                 raise ValidationError('Cant return things that are not taken')
 
@@ -58,26 +59,14 @@ class BookRent(models.Model):
     def update_rent_list(self):
         today = date.today()
         for record in self:
-            print_log("BOOK NAME and state: ")
-            print_log(record.rented_book_id)
-            print_log(record.state_of_rent)
-            print_log(record.start_of_rent)
-            print_log(today)
             if record.start_of_rent and record.start_of_rent <= today:
                 record.state_of_rent = "rented"
             elif record.start_of_rent and record.start_of_rent >= today:
                 record.state_of_rent = "reserved"
-            print_log("BOOK After NAME and state: ")
-            print_log(record.rented_book_id)
-            print_log(record.state_of_rent)
 
     @api.constrains('start_of_rent', 'end_of_rent')
     def _check_rent_dates(self):
-        today = date.today()
         for record in self:
-            # if record.start_of_rent < today:
-            #     raise ValidationError('We don''t rent books to time travelers')
-
             if record.start_of_rent > record.end_of_rent:
                 raise ValidationError('Start date must be before the end date.')
 
@@ -88,7 +77,6 @@ class BookRent(models.Model):
                 ('start_of_rent', '<=', record.end_of_rent),
                 ('end_of_rent', '>=', record.start_of_rent),
             ])
-
             if overlapping_rentals:
                 raise ValidationError(record.rented_book_id.book_name + ' is already rented for the selected period. (From: ' + str(record.start_of_rent) + ' Until: ' + str(record.end_of_rent) + ')')
 

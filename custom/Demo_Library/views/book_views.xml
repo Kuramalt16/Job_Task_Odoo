@@ -59,7 +59,14 @@
             </field>
     </record>
 
-    <menuitem id="menu_library_root" name="Library" sequence="0" web_icon="Demo_Library,static/describtion/icon.png"/>
-    <menuitem id="menu_library_books" name="Books" parent="menu_library_root" action="action_book_registry"/>
+    <menuitem id="menu_library_root"
+              name="Library"
+              sequence="0"
+              web_icon="Demo_Library,static/description/icon.png"/>
+
+    <menuitem id="menu_library_books"
+              name="Books"
+              parent="menu_library_root"
+              action="action_book_registry"/>
 
 </odoo>

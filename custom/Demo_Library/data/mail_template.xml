@@ -1,0 +1,24 @@
+<odoo>
+    <data>
+        <record id='reminder_mail_template' model='mail.template'>
+            <field name="name">Late Notice: Sent by mail</field>
+            <field name="model_id" ref="Demo_Library.model_rent_books"/>
+            <field name="email_from">National Library of EuroFondas</field>
+            <field name="partner_to">${object.contact.id}</field>
+            <field name="subject">Return ${object.rented_book_id.book_name}</field>
+            <field name="body_html" type="html">
+                <div style="margin: 0px; padding: 0px;">
+                    <p style="margin: 0px; padding: 0px; font-size: 13px;">
+                        Dear ${object.contact.name}
+                        <br /><br />
+                        You are LATE to return ${object.rented_book_id.book_name} for ${object.days_late} days, The Book was supposed to be returned by ${object.end_of_rent}
+                        <br /><br />
+                        Please return the book or be faced with criminal charges!
+                        <br /> <br />
+                        With Love, National Library of EuroFondas.
+                    </p>
+                </div>
+            </field>
+        </record>
+    </data>
+</odoo>

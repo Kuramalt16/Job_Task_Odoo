@@ -1,0 +1,10 @@
+<odoo>
+    <report
+        id="library_client_report"
+        string="Client Report"
+        model="rent.books"
+        report_type="qweb-pdf"
+        name="Demo_Library.Client_report"
+        file="Demo_Library.Client_report"/>
+
+</odoo>
